@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/skulpt@0.10.0/dist/skulpt.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/skulpt@0.10.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body>
+    <h1>Simple Calculator</h1>
+    <textarea id="code" rows="10" cols="50">print(1 + 1)</textarea><br>
+    <button onclick="runCode()">Run Code</button><br>
+    <div id="output"></div>
+    <script type="text/javascript">
+        function runCode() {
+            var code = document.getElementById("code").value;
+            var output = document.getElementById("output");
+            Sk.configure({output: function(text) { output.innerHTML += text + "\n"; }});
+            Sk.misceval.asyncToPromise(function() {
+                return Sk.importMainWithBody("<stdin>", false, code, true);
+            });
+        }
+    </script>
+</body>
+</html>
